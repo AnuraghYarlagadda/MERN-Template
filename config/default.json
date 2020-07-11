@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://cfguser:cfguser@project.wzvte.mongodb.net/project_db?retryWrites=true&w=majority",
+  "jwtSecret": "mySecretToken"
+}
