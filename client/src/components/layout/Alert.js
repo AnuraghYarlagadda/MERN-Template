@@ -18,7 +18,7 @@ const Alert = ({ alerts }) => {
     });
   }
   return (
-    <ToastContainer pauseOnFocusLoss={false} limit={5000} transition={Bounce} />
+    <ToastContainer pauseOnFocusLoss={false} limit={2} transition={Bounce} />
   );
 };
 

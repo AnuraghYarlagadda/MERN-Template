@@ -9,3 +9,9 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGOUT = "LOGOUT";
 export const ACCOUNT_DELETED = "ACCOUNT_DELETED";
+
+export const SET_OTP = "SET_OTP";
+export const REMOVE_OTP = "REMOVE_OTP";
+
+export const SET_FORMDATA = "SET_FORMDATA";
+export const CLEAR_FORMDATA = "CLEAR_FORMDATA";

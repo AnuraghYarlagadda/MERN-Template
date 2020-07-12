@@ -1,5 +1,6 @@
 import api from "../utils/api";
 import { setAlert } from "./alert";
+import { setOTP } from "./otp";
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -76,3 +77,20 @@ export const login = ({ email, password }) => async (dispatch) => {
 
 // Logout
 export const logout = () => ({ type: LOGOUT });
+
+// Verify Email
+export const verifyEmail = (formData, history) => async (dispatch) => {
+  try {
+    const res = await api.post("/verify", formData);
+    dispatch(setOTP(res.data));
+    history.replace("/verify");
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.message, "error")));
+    }
+    dispatch({
+      type: REGISTER_FAIL,
+    });
+  }
+};

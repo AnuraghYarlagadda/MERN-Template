@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 import { Link, Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { setAlert } from "../../actions/alert";
-import { register } from "../../actions/auth";
+import { verifyEmail } from "../../actions/auth";
+import { setFormData } from "../../actions/formData";
 import PropTypes from "prop-types";
 
 import { useFormik } from "formik";
@@ -13,7 +13,7 @@ const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
 const numericRegex = /(?=.*[0-9])/;
 
-const Register = ({ setAlert, register, isAuthenticated }) => {
+const Register = ({ setFormData, verifyEmail, history, isAuthenticated }) => {
   const formik = useFormik({
     initialValues: { name: "", email: "", password: "", confirm_password: "" },
     validationSchema: Yup.object({
@@ -33,7 +33,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         .required("Required!"),
     }),
     onSubmit: (values) => {
-      register(values);
+      setFormData(values);
+      verifyEmail(values, history);
     },
   });
 
@@ -113,8 +114,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   );
 };
 Register.propTypes = {
-  setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired,
+  setFormData: PropTypes.func.isRequired,
+  verifyEmail: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 
@@ -122,4 +123,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { setAlert, register })(Register);
+export default connect(mapStateToProps, { setFormData, verifyEmail })(Register);
