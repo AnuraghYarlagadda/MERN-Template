@@ -24,17 +24,16 @@ export const setOTP = (pin, timeout = 180000) => (dispatch) => {
   );
 };
 
-export const validateOTPAndRegister = (pin, formData, otp, history) => async (
+export const validateOTPAndRegister = (pin, formData, otps) => async (
   dispatch
 ) => {
-  const encryptedPins = otp.map(
+  const encryptedPins = otps.map(
     (otp) => otp.pin.email === formData.email && otp.pin.otp
   );
   var isMatch = false;
   try {
     for (const encryptedPin of encryptedPins) {
-      console.log(pin.pin);
-      isMatch = await bcrypt.compare(pin.pin, encryptedPin);
+      isMatch = await bcrypt.compare(pin, encryptedPin);
       if (isMatch) {
         dispatch(register(formData));
         dispatch(clearFormData());
@@ -44,6 +43,5 @@ export const validateOTPAndRegister = (pin, formData, otp, history) => async (
   } catch (e) {
     console.log(e);
   }
-  console.log(isMatch);
   if (!isMatch) dispatch(setAlert("Invalid OTP", "error"));
 };

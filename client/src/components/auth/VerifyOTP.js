@@ -2,8 +2,7 @@ import React, { Fragment } from "react";
 import { Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { setAlert } from "../../actions/alert";
-import { register, verifyEmail } from "../../actions/auth";
+import { verifyEmail } from "../../actions/auth";
 import { validateOTPAndRegister } from "../../actions/otp";
 import PropTypes from "prop-types";
 
@@ -13,14 +12,12 @@ import * as Yup from "yup";
 const numericRegex = /(?=^[0-9]*$)/;
 
 const VerifyOTP = ({
-  setAlert,
-  register,
   validateOTPAndRegister,
   history,
   verifyEmail,
   isAuthenticated,
   formData,
-  otp,
+  otps,
 }) => {
   const formik = useFormik({
     initialValues: { pin: "" },
@@ -32,7 +29,7 @@ const VerifyOTP = ({
         .required("Required!"),
     }),
     onSubmit: (values) => {
-      validateOTPAndRegister(values, formData, otp, history);
+      validateOTPAndRegister(values.pin, formData, otps);
     },
   });
 
@@ -67,8 +64,6 @@ const VerifyOTP = ({
   );
 };
 VerifyOTP.propTypes = {
-  setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired,
   verifyEmail: PropTypes.func.isRequired,
   validateOTPAndRegister: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
@@ -79,12 +74,10 @@ VerifyOTP.propTypes = {
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   formData: state.formData,
-  otp: state.otp,
+  otps: state.otp,
 });
 
 export default connect(mapStateToProps, {
-  setAlert,
-  register,
   verifyEmail,
   validateOTPAndRegister,
 })(VerifyOTP);
