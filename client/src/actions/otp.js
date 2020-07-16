@@ -2,7 +2,6 @@ import { SET_OTP, REMOVE_OTP } from "./types";
 import { v4 as uuid } from "uuid";
 import { setAlert } from "./alert";
 import { register } from "./auth";
-import { clearFormData } from "./formData";
 const bcrypt = require("bcryptjs");
 
 export const setOTP = (pin, timeout = 180000) => (dispatch) => {
@@ -36,7 +35,6 @@ export const validateOTPAndRegister = (pin, formData, otps) => async (
       isMatch = await bcrypt.compare(pin, encryptedPin);
       if (isMatch) {
         dispatch(register(formData));
-        dispatch(clearFormData());
         break;
       }
     }

@@ -1,6 +1,7 @@
 import api from "../utils/api";
 import { setAlert } from "./alert";
 import { setOTP } from "./otp";
+import { clearFormData } from "./formData";
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -20,7 +21,6 @@ export const loadUser = () => async (dispatch) => {
       type: USER_LOADED,
       payload: res.data,
     });
-    dispatch(setAlert(`Welcome ${res.data.name}`, "info"));
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
@@ -38,6 +38,7 @@ export const register = (formData) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(loadUser());
+    dispatch(clearFormData());
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {

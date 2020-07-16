@@ -2,5 +2,6 @@
   "mongoURI": "mongodb+srv://cfguser:cfguser@project.wzvte.mongodb.net/project_db?retryWrites=true&w=majority",
   "jwtSecret": "mySecretToken",
   "userEmail": "cfgjpmc@gmail.com",
-  "userPassword": "TeamCFG@1"
+  "userPassword": "TeamCFG@1",
+  "expiresIn": 3600
 }
