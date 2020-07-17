@@ -3,9 +3,11 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const verifyAuth = require("../../middleware/verifyAuth");
 
 //Bring User Model
 const User = require("../../dataModels/User");
+const { route } = require("./auth");
 
 // @route   POST api/user
 // @desc    Register User
@@ -50,6 +52,19 @@ router.post("/", async (req, res) => {
         res.json({ token });
       }
     );
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   DEL api/user
+// @desc    Remove User and all his entries (as of now deleting account)
+// @access  Private
+router.delete("/", verifyAuth, async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.user.id);
+    res.status(200).json({ message: "Deleted User!" });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Server Error");

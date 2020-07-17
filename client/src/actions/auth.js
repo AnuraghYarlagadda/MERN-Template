@@ -3,6 +3,7 @@ import { setAlert } from "./alert";
 import { setOTP } from "./otp";
 import { clearFormData } from "./formData";
 import {
+  ACCOUNT_DELETED,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
@@ -138,6 +139,20 @@ export const editProfile = ({ password, name }, history) => async (
   } catch (err) {
     console.log(err);
     if (!err.response) return;
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.message, "error")));
+    }
+  }
+};
+
+//Delete Account
+export const deleteAccount = () => async (dispatch) => {
+  try {
+    const res = await api.delete("/user");
+    dispatch({ type: ACCOUNT_DELETED });
+    dispatch(setAlert(res.data.message, ""));
+  } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((error) => dispatch(setAlert(error.message, "error")));

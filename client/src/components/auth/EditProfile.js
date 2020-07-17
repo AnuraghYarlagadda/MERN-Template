@@ -2,9 +2,14 @@ import React, { Fragment, useState } from "react";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { editProfile } from "../../actions/auth";
+import { editProfile, deleteAccount } from "../../actions/auth";
 
-import { MdVisibility, MdVisibilityOff, MdAccountCircle } from "react-icons/md";
+import {
+  MdVisibility,
+  MdVisibilityOff,
+  MdAccountCircle,
+  MdDeleteForever,
+} from "react-icons/md";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { makeStyles } from "@material-ui/core/styles";
@@ -14,7 +19,8 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import IconButton from "@material-ui/core/IconButton";
-
+import Swal from "sweetalert2/dist/sweetalert2.all.min.js";
+import "sweetalert2/src/sweetalert2.scss";
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
@@ -26,8 +32,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-const EditProfile = ({ editProfile, history }) => {
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: "btn btn-danger m-2",
+    cancelButton: "btn btn-success m-2",
+  },
+  buttonsStyling: false,
+});
+const EditProfile = ({ editProfile, history, deleteAccount }) => {
   const formik = useFormik({
     initialValues: { password: "", name: "" },
     validationSchema: Yup.object({
@@ -133,6 +145,36 @@ const EditProfile = ({ editProfile, history }) => {
             </div>
           </form>
           <hr />
+          <div className="row">
+            <div className="col-sm-3"></div>
+            <div className="col-sm-6">
+              Delete My Account
+              <IconButton
+                onMouseDown={handleMouseDownPassword}
+                onClick={() =>
+                  swalWithBootstrapButtons
+                    .fire({
+                      title: "Are you sure?",
+                      text: "You won't be able to revert this!",
+                      icon: "warning",
+                      showCancelButton: true,
+                      confirmButtonText: "Yes, delete it!",
+                      cancelButtonText: "No, cancel!",
+                      reverseButtons: true,
+                    })
+                    .then((result) => {
+                      if (result.value) {
+                        deleteAccount();
+                      }
+                    })
+                }
+              >
+                <MdDeleteForever size="1.5rem" style={{ color: "#d00205" }} />
+              </IconButton>
+            </div>
+            <div className="col-sm-3"></div>
+          </div>
+          <hr />
         </div>
         <div className="col-sm-3"></div>
       </div>
@@ -144,4 +186,6 @@ EditProfile.propTypes = {
   editProfile: PropTypes.func.isRequired,
 };
 
-export default connect(null, { editProfile })(withRouter(EditProfile));
+export default connect(null, { editProfile, deleteAccount })(
+  withRouter(EditProfile)
+);
