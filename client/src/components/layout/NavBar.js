@@ -36,10 +36,10 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           <RiAccountCircleLine size="1.3rem" /> {user ? `${user.name}` : ``}
         </DropdownToggle>
         <DropdownMenu right style={{ backgroundColor: "#f1f1f1" }}>
-          <DropdownItem>
+          <DropdownItem href="/editProfile">
             <AiFillProfile size="1.2rem" /> Edit Profile
           </DropdownItem>
-          <DropdownItem>
+          <DropdownItem href="/changePassword">
             <BsFillShieldLockFill size="1.2rem" /> Change Password
           </DropdownItem>
           <DropdownItem divider />

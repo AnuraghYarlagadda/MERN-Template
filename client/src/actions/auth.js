@@ -95,3 +95,52 @@ export const verifyEmail = (formData, history) => async (dispatch) => {
     });
   }
 };
+
+// Change Password
+export const changePassword = (
+  { current_password, password },
+  history
+) => async (dispatch) => {
+  const body = { current_password, password };
+
+  try {
+    if (current_password === password) {
+      dispatch(
+        setAlert("Reset Password can't be same as Current Password", "")
+      );
+      return;
+    }
+    const res = await api.put("/auth/changePassword", body);
+    dispatch(setAlert(res.data.message, "dark"));
+    dispatch(loadUser());
+    history.replace("/dashboard");
+  } catch (err) {
+    console.log(err);
+    if (!err.response) return;
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.message, "error")));
+    }
+  }
+};
+
+// Edit Profile
+export const editProfile = ({ password, name }, history) => async (
+  dispatch
+) => {
+  const body = { password, name };
+
+  try {
+    const res = await api.put("/auth/editProfile", body);
+    dispatch(setAlert(res.data.message, "dark"));
+    dispatch(loadUser());
+    history.replace("/dashboard");
+  } catch (err) {
+    console.log(err);
+    if (!err.response) return;
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.message, "error")));
+    }
+  }
+};

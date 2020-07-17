@@ -66,4 +66,71 @@ router.post("/", async (req, res) => {
   }
 });
 
+// @route   PUT api/auth/changePassword
+// @desc    Change User Password
+// @access  private
+router.put("/changePassword", verifyAuth, async (req, res) => {
+  //De-structure from req.body
+  const { current_password, password } = req.body;
+
+  try {
+    let user = await User.findById(req.user.id);
+    // Check if user exists
+    if (!user) {
+      return res
+        .status(400)
+        .json({ errors: [{ message: "Invalid Credentials" }] });
+    }
+
+    // Check password
+    const isMatch = await bcrypt.compare(current_password, user.password);
+    if (!isMatch) {
+      return res
+        .status(400)
+        .json({ errors: [{ message: "Wrong Current Password" }] });
+    }
+    // Encrypt password
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, salt);
+    await user.save();
+    res.status(200).json({ message: "Password Updated!" });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   PUT api/auth/editProfile
+// @desc    Edit user Profile
+// @access  private
+router.put("/editProfile", verifyAuth, async (req, res) => {
+  //De-structure from req.body
+  const { password, name } = req.body;
+
+  try {
+    let user = await User.findById(req.user.id);
+    // Check if user exists
+    if (!user) {
+      return res
+        .status(400)
+        .json({ errors: [{ message: "Invalid Credentials" }] });
+    }
+
+    // Check password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res
+        .status(400)
+        .json({ errors: [{ message: "Password Incorrect" }] });
+    }
+
+    user.name = name;
+    await user.save();
+    res.status(200).json({ message: "Profile Updated!" });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;

@@ -14,7 +14,7 @@ const Alert = ({ alerts }) => {
       else if (alert.alertType === "success")
         return toast.success(alert.message);
       else if (alert.alertType === "warning") return toast.warn(alert.message);
-      else if (alert.alertType === "error")
+      else if (alert.alertType === "error") {
         return Swal.fire({
           title: "Error!",
           text: alert.message,
@@ -26,7 +26,7 @@ const Alert = ({ alerts }) => {
             popup: "animate__animated animate__fadeOutUp",
           },
         });
-      else if (alert.alertType === "dark") return toast.dark(alert.message);
+      } else if (alert.alertType === "dark") return toast.dark(alert.message);
       else return toast(alert.message);
     });
   }

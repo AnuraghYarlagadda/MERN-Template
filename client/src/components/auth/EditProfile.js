@@ -1,22 +1,19 @@
 import React, { Fragment, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import { login } from "../../actions/auth";
+import { connect } from "react-redux";
+import { editProfile } from "../../actions/auth";
 
+import { MdVisibility, MdVisibilityOff, MdAccountCircle } from "react-icons/md";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
 import { makeStyles } from "@material-ui/core/styles";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import IconButton from "@material-ui/core/IconButton";
-import { MdVisibility, MdVisibilityOff } from "react-icons/md";
-import { AiOutlineMail } from "react-icons/ai";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -30,15 +27,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = ({ login, isAuthenticated, loading }) => {
+const EditProfile = ({ editProfile, history }) => {
   const formik = useFormik({
-    initialValues: { email: "", password: "" },
+    initialValues: { password: "", name: "" },
     validationSchema: Yup.object({
-      email: Yup.string().email("Invalid E-mail format").required("Required!"),
+      name: Yup.string()
+        .min(5, "Minimum 5 Characters")
+        .max(12, "Maximum 12 Characters")
+        .required("Required!"),
       password: Yup.string().required("Required!"),
     }),
     onSubmit: (values) => {
-      login(values);
+      editProfile(values, history);
     },
   });
   const classes = useStyles();
@@ -46,58 +46,14 @@ const Login = ({ login, isAuthenticated, loading }) => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
-  //If Loading Show Spinner
-  if (loading) {
-    return (
-      <div className={classes.root}>
-        <CircularProgress />
-      </div>
-    );
-  }
-
-  // Redirect if logged-in
-  else if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
-  }
-
   return (
     <Fragment>
       <div className="row">
         <div className="col-sm-3"></div>
         <div className="col-sm-6 jumbotron bg-light">
-          <h1>Sign In</h1>
-          <p>
-            <i className="fas fa-user"></i> Sign Into Your Account
-          </p>
+          <h1>Edit Profile</h1>
           <hr />
           <form onSubmit={formik.handleSubmit}>
-            <FormControl
-              className={classes.margin}
-              fullWidth
-              error={formik.errors.email && formik.touched.email}
-            >
-              <InputLabel htmlFor="email">Email</InputLabel>
-              <Input
-                id="email"
-                name="email"
-                label="email"
-                type="email"
-                value={formik.values.email}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                endAdornment={
-                  <InputAdornment position="start">
-                    <AiOutlineMail size="1.5rem" style={{ color: "#d00205" }} />
-                  </InputAdornment>
-                }
-              />
-              <FormHelperText id="component-error-text">
-                {formik.errors.email &&
-                  formik.touched.email &&
-                  formik.errors.email}
-              </FormHelperText>
-            </FormControl>
             <FormControl
               className={classes.margin}
               fullWidth
@@ -140,16 +96,43 @@ const Login = ({ login, isAuthenticated, loading }) => {
                   formik.errors.password}
               </FormHelperText>
             </FormControl>
+            <FormControl
+              className={classes.margin}
+              fullWidth
+              error={formik.errors.name && formik.touched.name}
+            >
+              <InputLabel htmlFor="name">Name</InputLabel>
+              <Input
+                id="name"
+                name="name"
+                label="Name"
+                type="text"
+                value={formik.values.name}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                endAdornment={
+                  <InputAdornment position="start">
+                    <MdAccountCircle
+                      size="1.5rem"
+                      style={{ color: "#1273de" }}
+                    />
+                  </InputAdornment>
+                }
+              />
+              <FormHelperText id="component-error-text">
+                {formik.errors.name &&
+                  formik.touched.name &&
+                  formik.errors.name}
+              </FormHelperText>
+            </FormControl>
+
             <div className="text-center">
-              <button type="submit" className="btn btn-primary">
-                Sign In
+              <button type="submit" className="btn btn-danger">
+                Submit
               </button>
             </div>
           </form>
           <hr />
-          <h6>
-            Don't have an account? <Link to="/register">Sign Up</Link>
-          </h6>
         </div>
         <div className="col-sm-3"></div>
       </div>
@@ -157,15 +140,8 @@ const Login = ({ login, isAuthenticated, loading }) => {
   );
 };
 
-Login.propTypes = {
-  login: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
+EditProfile.propTypes = {
+  editProfile: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  loading: state.auth.loading,
-});
-
-export default connect(mapStateToProps, { login })(Login);
+export default connect(null, { editProfile })(withRouter(EditProfile));

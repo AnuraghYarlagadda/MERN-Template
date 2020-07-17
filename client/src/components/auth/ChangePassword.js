@@ -1,23 +1,19 @@
 import React, { Fragment, useState } from "react";
-import { Link, Redirect, withRouter } from "react-router-dom";
-
-import { connect } from "react-redux";
-import { verifyEmail } from "../../actions/auth";
-import { setFormData } from "../../actions/formData";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { changePassword } from "../../actions/auth";
 
+import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { makeStyles } from "@material-ui/core/styles";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import IconButton from "@material-ui/core/IconButton";
-import { MdAccountCircle, MdVisibility, MdVisibilityOff } from "react-icons/md";
-import { AiOutlineMail } from "react-icons/ai";
 
 const lowercaseRegex = /(?=.*[a-z])/;
 const uppercaseRegex = /(?=.*[A-Z])/;
@@ -33,25 +29,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const Register = ({
-  setFormData,
-  verifyEmail,
-  history,
-  isAuthenticated,
-  loading,
-}) => {
+
+const ChangePassword = ({ changePassword, history }) => {
   const formik = useFormik({
-    initialValues: { name: "", email: "", password: "", confirm_password: "" },
+    initialValues: { current_password: "", password: "", confirm_password: "" },
     validationSchema: Yup.object({
-      name: Yup.string()
-        .min(5, "Minimum 5 Characters")
-        .max(12, "Maximum 12 Characters")
-        .required("Required!"),
-      email: Yup.string().email("Invalid E-mail format").required("Required!"),
+      current_password: Yup.string().required("Required!"),
       password: Yup.string()
-        .matches(lowercaseRegex, "One lowercase required!")
-        .matches(uppercaseRegex, "One uppercase required!")
-        .matches(numericRegex, "One number required!")
+        .matches(lowercaseRegex, "one lowercase required!")
+        .matches(uppercaseRegex, "one uppercase required!")
+        .matches(numericRegex, "one number required!")
         .min(8, "Minimum 8 characters")
         .required("Required!"),
       confirm_password: Yup.string()
@@ -59,99 +46,73 @@ const Register = ({
         .required("Required!"),
     }),
     onSubmit: (values) => {
-      setFormData(values);
-      verifyEmail(values, history);
+      changePassword(values, history);
     },
   });
   const classes = useStyles();
+  const [current_password, toggleCurrentPassword] = useState(false);
   const [password, togglePassword] = useState(false);
   const [confirm_password, toggleConfirmPassword] = useState(false);
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
-  //If Loading Show Spinner
-  if (loading) {
-    return (
-      <div className={classes.root}>
-        <CircularProgress />
-      </div>
-    );
-  }
-
-  // Redirect if logged-in
-  else if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
-  }
-
   return (
     <Fragment>
       <div className="row">
         <div className="col-sm-3"></div>
         <div className="col-sm-6 jumbotron bg-light">
-          <h1>Sign Up</h1>
-          <p>
-            <i className="fas fa-user"></i> Please fill in this form to create
-            an account!
-          </p>
+          <h1>Reset Account Password</h1>
           <hr />
           <form onSubmit={formik.handleSubmit}>
             <FormControl
               className={classes.margin}
               fullWidth
-              error={formik.errors.name && formik.touched.name}
+              error={
+                formik.errors.current_password &&
+                formik.touched.current_password
+              }
             >
-              <InputLabel htmlFor="name">Name</InputLabel>
+              <InputLabel htmlFor="current_password">
+                Current Password
+              </InputLabel>
               <Input
-                id="name"
-                name="name"
-                label="Name"
-                type="text"
-                value={formik.values.name}
+                autoComplete="nope"
+                id="current_password"
+                name="current_password"
+                type={current_password ? "text" : "password"}
+                value={formik.values.current_password}
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 endAdornment={
-                  <InputAdornment position="start">
-                    <MdAccountCircle
-                      size="1.5rem"
-                      style={{ color: "#1273de" }}
-                    />
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => toggleCurrentPassword(!current_password)}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {!current_password ? (
+                        <MdVisibility
+                          size="1.5rem"
+                          style={{ color: "#40bf45" }}
+                        />
+                      ) : (
+                        <MdVisibilityOff
+                          size="1.5rem"
+                          style={{ color: "#de1212" }}
+                        />
+                      )}
+                    </IconButton>
                   </InputAdornment>
                 }
               />
               <FormHelperText id="component-error-text">
-                {formik.errors.name &&
-                  formik.touched.name &&
-                  formik.errors.name}
+                {formik.errors.current_password &&
+                  formik.touched.current_password &&
+                  formik.errors.current_password}
               </FormHelperText>
             </FormControl>
 
-            <FormControl
-              className={classes.margin}
-              fullWidth
-              error={formik.errors.email && formik.touched.email}
-            >
-              <InputLabel htmlFor="email">Email</InputLabel>
-              <Input
-                id="email"
-                name="email"
-                label="email"
-                type="email"
-                value={formik.values.email}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                endAdornment={
-                  <InputAdornment position="start">
-                    <AiOutlineMail size="1.5rem" style={{ color: "#d00205" }} />
-                  </InputAdornment>
-                }
-              />
-              <FormHelperText id="component-error-text">
-                {formik.errors.email &&
-                  formik.touched.email &&
-                  formik.errors.email}
-              </FormHelperText>
-            </FormControl>
             <FormControl
               className={classes.margin}
               fullWidth
@@ -244,33 +205,21 @@ const Register = ({
             </FormControl>
 
             <div className="text-center">
-              <button type="submit" className="btn btn-primary">
-                Sign Up
+              <button type="submit" className="btn btn-danger">
+                Reset
               </button>
             </div>
           </form>
           <hr />
-          <h6>
-            Already have an account? <Link to="/login">Sign In</Link>
-          </h6>
         </div>
         <div className="col-sm-3"></div>
       </div>
     </Fragment>
   );
 };
-Register.propTypes = {
-  setFormData: PropTypes.func.isRequired,
-  verifyEmail: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
+
+ChangePassword.propTypes = {
+  changePassword: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  loading: state.auth.loading,
-});
-
-export default connect(mapStateToProps, { setFormData, verifyEmail })(
-  withRouter(Register)
-);
+export default connect(null, { changePassword })(withRouter(ChangePassword));
