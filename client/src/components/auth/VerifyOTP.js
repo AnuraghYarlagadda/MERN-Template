@@ -75,7 +75,7 @@ const VerifyOTP = ({
     <Fragment>
       <div className="row">
         <div className="col-sm-3"></div>
-        <div className="col-sm-6 jumbotron bg-light">
+        <div className="col-sm-6 card jumbotron bg-light border-dark">
           <h1 className="my-3">Verify OTP</h1>
           <div className="row">
             <div className="col-sm-9 mt-2">

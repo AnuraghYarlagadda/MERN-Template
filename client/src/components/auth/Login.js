@@ -17,7 +17,6 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import IconButton from "@material-ui/core/IconButton";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { AiOutlineMail } from "react-icons/ai";
-
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
@@ -65,7 +64,7 @@ const Login = ({ login, isAuthenticated, loading }) => {
     <Fragment>
       <div className="row">
         <div className="col-sm-3"></div>
-        <div className="col-sm-6 jumbotron bg-light">
+        <div className="col-sm-6 card jumbotron bg-light border-dark">
           <h1>Sign In</h1>
           <p>
             <i className="fas fa-user"></i> Sign Into Your Account

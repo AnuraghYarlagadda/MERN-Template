@@ -88,7 +88,7 @@ const Register = ({
     <Fragment>
       <div className="row">
         <div className="col-sm-3"></div>
-        <div className="col-sm-6 jumbotron bg-light">
+        <div className="col-sm-6 card jumbotron bg-light border-dark">
           <h1>Sign Up</h1>
           <p>
             <i className="fas fa-user"></i> Please fill in this form to create

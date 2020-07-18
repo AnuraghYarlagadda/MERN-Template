@@ -61,7 +61,7 @@ const ChangePassword = ({ changePassword, history }) => {
     <Fragment>
       <div className="row">
         <div className="col-sm-3"></div>
-        <div className="col-sm-6 jumbotron bg-light">
+        <div className="col-sm-6 card jumbotron bg-light border-dark">
           <h1>Reset Account Password</h1>
           <hr />
           <form onSubmit={formik.handleSubmit}>
