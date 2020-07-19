@@ -3,5 +3,8 @@
   "jwtSecret": "mySecretToken",
   "userEmail": "cfgjpmc@gmail.com",
   "userPassword": "TeamCFG@1",
-  "expiresIn": 3600
+  "expiresIn": 3600,
+  "cloud_name": "dkje3zxuv",
+  "api_key": 998251142223611,
+  "api_secret": "f1t15hXMpNjb7hJQlQwucBxD-eI"
 }

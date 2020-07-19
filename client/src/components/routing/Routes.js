@@ -9,6 +9,7 @@ import Alert from "../layout/Alert";
 import Dashboard from "../dashboard/Dashboard";
 import NotFound from "../layout/NotFound";
 import PrivateRoute from "./PrivateRoute";
+import FileUpload from "../dashboard/FileUpload";
 const Routes = () => {
   return (
     <section className="container">
@@ -20,6 +21,7 @@ const Routes = () => {
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/changePassword" component={ChangePassword} />
         <PrivateRoute exact path="/editProfile" component={EditProfile} />
+        <PrivateRoute exact path="/fileUpload" component={FileUpload} />
         <Route component={NotFound} />
       </Switch>
     </section>
