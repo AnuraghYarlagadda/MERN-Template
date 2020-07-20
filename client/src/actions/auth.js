@@ -13,6 +13,9 @@ import {
   LOGOUT,
 } from "./types";
 
+import Swal from "sweetalert2/dist/sweetalert2.all.min.js";
+import "sweetalert2/src/sweetalert2.scss";
+
 // Load User
 export const loadUser = () => async (dispatch) => {
   try {
@@ -40,6 +43,11 @@ export const register = (formData) => async (dispatch) => {
     });
     dispatch(loadUser());
     dispatch(clearFormData());
+    Swal.fire({
+      icon: "success",
+      title: "Hello " + res.data.name,
+      text: "Welcome to the Project😃",
+    });
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -63,8 +71,13 @@ export const login = ({ email, password }) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-
     dispatch(loadUser());
+
+    Swal.fire({
+      icon: "success",
+      title: "Hello " + res.data.name,
+      text: "Welcome to the Project😃",
+    });
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -78,7 +91,14 @@ export const login = ({ email, password }) => async (dispatch) => {
 };
 
 // Logout
-export const logout = () => ({ type: LOGOUT });
+export const logout = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
+  Swal.fire({
+    icon: "info",
+    title: "Logout Successfull!",
+    text: "Visit us Back 😃",
+  });
+};
 
 // Verify Email
 export const verifyEmail = (formData, history) => async (dispatch) => {
@@ -116,7 +136,6 @@ export const changePassword = (
     dispatch(loadUser());
     history.replace("/dashboard");
   } catch (err) {
-    console.log(err);
     if (!err.response) return;
     const errors = err.response.data.errors;
     if (errors) {
@@ -137,7 +156,6 @@ export const editProfile = ({ password, name }, history) => async (
     dispatch(loadUser());
     history.replace("/dashboard");
   } catch (err) {
-    console.log(err);
     if (!err.response) return;
     const errors = err.response.data.errors;
     if (errors) {

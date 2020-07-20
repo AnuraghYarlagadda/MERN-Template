@@ -49,7 +49,7 @@ router.post("/", async (req, res) => {
       { expiresIn: config.get("expiresIn") },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.json({ token: token, name: user.name });
       }
     );
   } catch (error) {

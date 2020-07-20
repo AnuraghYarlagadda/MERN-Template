@@ -20,6 +20,16 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import Swal from "sweetalert2/dist/sweetalert2.all.min.js";
+import "sweetalert2/src/sweetalert2.scss";
+
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: "btn btn-danger m-2",
+    cancelButton: "btn btn-success m-2",
+  },
+  buttonsStyling: false,
+});
 
 const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +53,32 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
             <BsFillShieldLockFill size="1.2rem" /> Change Password
           </DropdownItem>
           <DropdownItem divider />
-          <DropdownItem onClick={logout} href="#">
+          <DropdownItem
+            onClick={() =>
+              swalWithBootstrapButtons
+                .fire({
+                  title: "Are you sure?",
+                  text: "Do you want to Logout?",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonText: "Yes, Logout!",
+                  cancelButtonText: "No, Stay here!",
+                  reverseButtons: true,
+                })
+                .then((result) => {
+                  if (result.value) {
+                    logout();
+                  } else {
+                    Swal.fire({
+                      icon: "error",
+                      title: "Log-Out cancelled!",
+                      text: "Welcome Back 😃",
+                    });
+                  }
+                })
+            }
+            href="#"
+          >
             <FaSignOutAlt /> Logout
           </DropdownItem>
         </DropdownMenu>

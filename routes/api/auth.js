@@ -57,7 +57,7 @@ router.post("/", async (req, res) => {
       { expiresIn: config.get("expiresIn") },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.json({ token: token, name: user.name });
       }
     );
   } catch (error) {
@@ -87,7 +87,7 @@ router.put("/changePassword", verifyAuth, async (req, res) => {
     if (!isMatch) {
       return res
         .status(400)
-        .json({ errors: [{ message: "Wrong Current Password" }] });
+        .json({ errors: [{ message: "Password Incorrect" }] });
     }
     // Encrypt password
     const salt = await bcrypt.genSalt(10);
