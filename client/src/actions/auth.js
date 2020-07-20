@@ -95,7 +95,7 @@ export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT });
   Swal.fire({
     icon: "info",
-    title: "Logout Successfull!",
+    title: "Log-Out Successfull!",
     text: "Visit us Back 😃",
   });
 };

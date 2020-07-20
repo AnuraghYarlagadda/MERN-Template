@@ -71,7 +71,7 @@ const EditProfile = ({ editProfile, history, deleteAccount }) => {
               fullWidth
               error={formik.errors.password && formik.touched.password}
             >
-              <InputLabel htmlFor="password">Password</InputLabel>
+              <InputLabel htmlFor="password">Check Password</InputLabel>
               <Input
                 autoComplete="nope"
                 id="password"

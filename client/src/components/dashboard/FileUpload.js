@@ -63,7 +63,7 @@ const FileUpload = () => {
         <div className="col-sm-8">
           <form onSubmit={(e) => handleFileUpload(e)}>
             <input type="file" onChange={onFileSelected} />
-            <input type="submit"></input>
+            <input type="submit" className="btn btn-primary"></input>
           </form>
         </div>
         <div className="col-sm-4">

@@ -118,7 +118,7 @@ const ChangePassword = ({ changePassword, history }) => {
               fullWidth
               error={formik.errors.password && formik.touched.password}
             >
-              <InputLabel htmlFor="password">Password</InputLabel>
+              <InputLabel htmlFor="password">New Password</InputLabel>
               <Input
                 autoComplete="nope"
                 id="password"
