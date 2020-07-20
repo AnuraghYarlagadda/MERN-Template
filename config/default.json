@@ -4,7 +4,16 @@
   "userEmail": "cfgjpmc@gmail.com",
   "userPassword": "TeamCFG@1",
   "expiresIn": 3600,
-  "cloud_name": "dkje3zxuv",
-  "api_key": 998251142223611,
-  "api_secret": "f1t15hXMpNjb7hJQlQwucBxD-eI"
+  "firebase": {
+    "type": "service_account",
+    "project_id": "project-c1596",
+    "private_key_id": "b324e0c60e65990f5a4f5e8f7b30745d855597d4",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDDwej6LriAj3nS\nRb9N/VEg/Wi+5HAGPS7AutgGY6V5qthCIWU6tJEx14uQH40ALo2eB6fGpsCyknND\nfRnXwvAq6XiC2G5P7SxwH9i/mFsMD6evKio1GLieaVJflNuoiPahepFcMMuh/k/H\nZhuR2rZPSMLO53Fig38oX+KC4ZFbYmM+9mIWI/tsTV/XDiiJxzc7R6mYrp14uT8g\nIKP5J01xm05+fCd8asRPUaKWVIE/b9wCYJrBbO78sQHZ6u11VJnRdNSA9XvTe7oW\nEAdk1VUHBVTnG953N4ar/c9ddTab3vN9XRFKAaFyw9QeQPH6lR8XWNz/ZKfmZsK3\nRfK2S8SPAgMBAAECggEAJBcTb1B+xoDtKjWeq++4bdcaYRs3hgbwoCqyWhcz8kbr\noOGMSrLwk9pTyinu8moixNBPf8HNg/6ZDoe5ZHx1j8vEYocpa0XkK/XLHaOmoYYf\nWZ1x86EPpHDxdVq51owNwD6bHv6GBGMg7TenfI/wjZRyCfhEgK+SmWx4E74ncMvT\nZ3Ceoqm/Xvup3hYRZeoEUOvUVEWrmP/PLKSd8bHRrWh8biyjMPTsR0pbxGxq3Dhe\ngrIdXg1nhNn5K6GZoEr6q0US7JSQZtBFcmlU3ZC/mC0TiYYCvGYepK8Hojvn5//F\nt3BzztcbESTwl6PGI5joBb/58hthVxIlj4gSegKj1QKBgQD2jgUM6NQ8g6vDkOn8\nNL58W5s5jks2MSViUEl/gIfkEJaM1kaUAiEs65j12RruZt5S4T1TS0KhL6TRqkAA\nG9fKiuFR39gSPOWSnsnPByFJjEslYe6S1LoFP00iFUiy7P9nQS7c+m3AINTpzXl9\nQ4jW3jAe8Pc1UdaSfjUtOurOxQKBgQDLQbewqMu0FmgRYi8+etL40+lN9UOioh1N\noyDU0fR2Lp7InSMlSgptCp0edT8Y+3BEIWOwNbpQontT4pztX330YW/hDIapnrVW\nPpH4h57latfwbowoYV9+CejZaQZHPJgAyLGKnNRovw9pg5cJQ7ZB9YHHiTwlHobq\nfZKxq3N7QwKBgQDgPPiA7j0hMIwGmQUGOZ5JkjNSHIVxKy+aA/VkvixZk3CpdLTK\nJkmwBjKe3q8sxmhLrslMuTVHTgK0IgiFUM1pS/hzs4dbxwDw4fQfk5eFwdASlsgZ\nyNnKrfDkH8F34i7D5TfPCQDKbdHXNubYs5R//6J6caQUXXMu1xRcJ6qpFQKBgQDE\ndicJGH6c+TNp6g9kQu/9F0dg1PqlDjFow46OZsn2GaXcnxZDisd9Ek9AC3ALw62G\nDQgAYE5Qdlzifh3UywJB3pR3YNYgyYjZbe1F3kDV22oRuai7tzLH7ugkjQFGheke\niN4i7ufYvyQ0hr7Mc6iNJLJmnd2Gu3UI3ouWM/SRZQKBgCRDMHoT+SSNFNrx3vth\nV0T7OgW8R4c2SZ1XFw/5OC+Ol5MUmk+ea/TYLrekzCZ/e4F10pplquR/Fd3hLJNd\n1HeZ+KUerlCX/AetTj3knnES6rZAjne3Fc2f3qVHzh6eIBZ4PJ6xuni0AAMQn6XI\nB2He3hA+2fOXDwP8u3pe/11s\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-lmdr4@project-c1596.iam.gserviceaccount.com",
+    "client_id": "116968645416064557409",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-lmdr4%40project-c1596.iam.gserviceaccount.com"
+  }
 }

@@ -6,7 +6,7 @@ const verifyAuth = require("../../middleware/verifyAuth");
 
 var admin = require("firebase-admin");
 
-var serviceAccount = require("../../config/serviceAccountKey.json");
+var serviceAccount = config.get("firebase");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
