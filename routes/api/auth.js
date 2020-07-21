@@ -133,4 +133,31 @@ router.put("/editProfile", verifyAuth, async (req, res) => {
   }
 });
 
+// @route   PUT api/auth/resetPassword
+// @desc    Reset User Password when forgot
+// @access  public
+router.put("/resetPassword", async (req, res) => {
+  //De-structure from req.body
+  const { email, password } = req.body;
+
+  try {
+    let user = await User.findOne({ email });
+    // Check if user exists
+    if (!user) {
+      return res
+        .status(400)
+        .json({ errors: [{ message: "Invalid Credentials" }] });
+    }
+
+    // Encrypt password
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, salt);
+    await user.save();
+    res.status(200).json({ message: "Password has been reset!" });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;

@@ -43,3 +43,27 @@ export const validateOTPAndRegister = (pin, formData, otps) => async (
   }
   if (!isMatch) dispatch(setAlert("Invalid OTP", "error"));
 };
+
+export const validateOTPAndResetPassword = (
+  pin,
+  formData,
+  otps,
+  history
+) => async (dispatch) => {
+  const encryptedPins = otps.map(
+    (otp) => otp.pin.email === formData.email && otp.pin.otp
+  );
+  var isMatch = false;
+  try {
+    for (const encryptedPin of encryptedPins) {
+      isMatch = await bcrypt.compare(pin, encryptedPin);
+      if (isMatch) {
+        history.replace("/resetPassword");
+        break;
+      }
+    }
+  } catch (e) {
+    console.log(e);
+  }
+  if (!isMatch) dispatch(setAlert("Invalid OTP", "error"));
+};

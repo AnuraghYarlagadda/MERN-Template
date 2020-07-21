@@ -11,6 +11,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  CLEAR_FORMDATA,
 } from "./types";
 
 import Swal from "sweetalert2/dist/sweetalert2.all.min.js";
@@ -39,7 +40,7 @@ export const register = (formData) => async (dispatch) => {
 
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: res.data,
+      payload: { token: res.data.token },
     });
     dispatch(loadUser());
     dispatch(clearFormData());
@@ -69,10 +70,10 @@ export const login = ({ email, password }) => async (dispatch) => {
 
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: res.data,
+      payload: { token: res.data.token },
     });
     dispatch(loadUser());
-
+    dispatch(clearFormData());
     Swal.fire({
       icon: "success",
       title: "Hello " + res.data.name,
@@ -114,6 +115,7 @@ export const verifyEmail = (formData, history) => async (dispatch) => {
     dispatch({
       type: REGISTER_FAIL,
     });
+    dispatch({ type: CLEAR_FORMDATA });
   }
 };
 
@@ -171,6 +173,26 @@ export const deleteAccount = () => async (dispatch) => {
     dispatch({ type: ACCOUNT_DELETED });
     dispatch(setAlert(res.data.message, ""));
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.message, "error")));
+    }
+  }
+};
+
+// Reset Password when "Forgot"
+export const resetPassword = ({ email }, { password }, history) => async (
+  dispatch
+) => {
+  const body = { email, password };
+
+  try {
+    const res = await api.put("/auth/resetPassword", body);
+    dispatch(setAlert(res.data.message, "dark"));
+    dispatch(login({ email, password }));
+    history.replace("/dashboard");
+  } catch (err) {
+    if (!err.response) return;
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((error) => dispatch(setAlert(error.message, "error")));

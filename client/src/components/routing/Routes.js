@@ -10,6 +10,8 @@ import Dashboard from "../dashboard/Dashboard";
 import NotFound from "../layout/NotFound";
 import PrivateRoute from "./PrivateRoute";
 import FileUpload from "../dashboard/FileUpload";
+import ForgotPassword from "../auth/ForgotPassword";
+import ResetPassword from "../auth/ResetPassword";
 const Routes = () => {
   return (
     <section className="container">
@@ -18,11 +20,13 @@ const Routes = () => {
         <Route exact path="/register" component={Register} />
         <Route exact path="/verify" component={VerifyOTP} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/forgotPassword" component={ForgotPassword} />
+        <Route exact path="/resetPassword" component={ResetPassword} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/changePassword" component={ChangePassword} />
         <PrivateRoute exact path="/editProfile" component={EditProfile} />
         <PrivateRoute exact path="/fileUpload" component={FileUpload} />
-        <Route component={NotFound} />
+        <PrivateRoute component={NotFound} />
       </Switch>
     </section>
   );

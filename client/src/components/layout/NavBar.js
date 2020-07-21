@@ -147,20 +147,20 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
                       Charts
                     </Link>
                   </li>
-                  <li class="submenu">
+                  <li className="submenu">
                     <a
                       href="chartsSubMenu"
                       rel="noopener noreferrer"
                       data-toggle="collapse"
                       aria-expanded="false"
-                      class="dropdown-toggle"
+                      className="dropdown-toggle"
                     >
                       <span>
                         <FaChartBar size="1.5rem" />
                       </span>{" "}
                       Charts
                     </a>
-                    <ul class="collapse list-unstyled" id="chartsSubMenu">
+                    <ul className="collapse list-unstyled" id="chartsSubMenu">
                       <li>
                         <Link to="/charts">
                           <span>
@@ -184,7 +184,7 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
 
         <div
           id="content"
-          className={!loading && (isAuthenticated ? "p-4 p-md-5" : "")}
+          className={!loading ? (isAuthenticated ? "p-4 p-md-5" : "") : ""}
         >
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">

@@ -12,15 +12,26 @@ const User = require("../../dataModels/User");
 // @access  public
 router.post("/", async (req, res) => {
   // De-structure from req.body
-  const { name, email, password } = req.body;
+  const { email, forgot } = req.body;
 
   try {
     let user = await User.findOne({ email });
-    // Check if user exists
-    if (user) {
-      return res
-        .status(400)
-        .json({ errors: [{ message: "User Already Exists" }] });
+
+    // If ForgotPassword is true
+    if (forgot) {
+      // Check if user exists
+      if (!user) {
+        return res
+          .status(400)
+          .json({ errors: [{ message: "Invalid Credentials" }] });
+      }
+    } else {
+      // Check if user exists
+      if (user) {
+        return res
+          .status(400)
+          .json({ errors: [{ message: "User Already Exists" }] });
+      }
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();

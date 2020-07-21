@@ -2,7 +2,10 @@ import React, { Fragment, useState } from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { verifyEmail } from "../../actions/auth";
-import { validateOTPAndRegister } from "../../actions/otp";
+import {
+  validateOTPAndRegister,
+  validateOTPAndResetPassword,
+} from "../../actions/otp";
 import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
@@ -43,6 +46,7 @@ const renderTime = () => Fragment;
 
 const VerifyOTP = ({
   validateOTPAndRegister,
+  validateOTPAndResetPassword,
   history,
   verifyEmail,
   isAuthenticated,
@@ -99,7 +103,11 @@ const VerifyOTP = ({
                     setMessage("Invalid OTP");
                   } else {
                     setMessage("");
-                    validateOTPAndRegister(OTP, formData, otps);
+                    if (formData.forgot) {
+                      validateOTPAndResetPassword(OTP, formData, otps, history);
+                    } else {
+                      validateOTPAndRegister(OTP, formData, otps);
+                    }
                   }
                 }}
               >
@@ -135,6 +143,7 @@ const VerifyOTP = ({
 VerifyOTP.propTypes = {
   verifyEmail: PropTypes.func.isRequired,
   validateOTPAndRegister: PropTypes.func.isRequired,
+  validateOTPAndResetPassword: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   formData: PropTypes.object.isRequired,
@@ -151,4 +160,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   verifyEmail,
   validateOTPAndRegister,
+  validateOTPAndResetPassword,
 })(withRouter(VerifyOTP));
