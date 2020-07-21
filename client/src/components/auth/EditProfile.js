@@ -145,9 +145,8 @@ const EditProfile = ({ editProfile, history, deleteAccount }) => {
             </div>
           </form>
           <hr />
-          <div className="row">
-            <div className="col-sm-3"></div>
-            <div className="col-sm-6">
+          <div className="row text-center">
+            <h5 className="text-center">
               Delete My Account
               <IconButton
                 onMouseDown={handleMouseDownPassword}
@@ -171,8 +170,7 @@ const EditProfile = ({ editProfile, history, deleteAccount }) => {
               >
                 <MdDeleteForever size="1.5rem" style={{ color: "#d00205" }} />
               </IconButton>
-            </div>
-            <div className="col-sm-3"></div>
+            </h5>
           </div>
           <hr />
         </div>

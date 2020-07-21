@@ -3,33 +3,26 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { makeStyles } from "@material-ui/core/styles";
-const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-  root: {
-    display: "flex",
-    "& > * + *": {
-      marginLeft: theme.spacing(2),
-    },
-  },
-}));
 
 const Landing = ({ isAuthenticated, loading }) => {
-  const classes = useStyles();
   //If Loading Show Spinner
   if (loading) {
     return (
-      <div className={classes.root}>
-        <CircularProgress />
+      <div className="text-center">
+        <CircularProgress size="5rem" color="secondary" />
       </div>
     );
   } else if (isAuthenticated) {
     return <Redirect to="/dashboard" />;
   }
 
-  return <div>Project Overview</div>;
+  return (
+    <div>
+      <div className="text-center">
+        <h1>Project Overview</h1>
+      </div>
+    </div>
+  );
 };
 
 Landing.propTypes = {

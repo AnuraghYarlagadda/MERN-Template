@@ -153,7 +153,7 @@ router.put("/resetPassword", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(password, salt);
     await user.save();
-    res.status(200).json({ message: "Password has been reset!" });
+    res.status(200).json({ message: "Password reset successfull!" });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Server Error");

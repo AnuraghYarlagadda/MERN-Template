@@ -8,23 +8,11 @@ import {
 } from "../../actions/otp";
 import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import OTPInput, { ResendOTP } from "otp-input-react";
-const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-  root: {
-    display: "flex",
-    "& > * + *": {
-      marginLeft: theme.spacing(2),
-    },
-  },
-}));
 
 const renderButton = (buttonProps) => {
   return (
@@ -54,15 +42,14 @@ const VerifyOTP = ({
   formData,
   otps,
 }) => {
-  const classes = useStyles();
   const [OTP, setOTP] = useState("");
   const [errorMessage, setMessage] = useState("");
 
   //If Loading Show Spinner
   if (loading) {
     return (
-      <div className={classes.root}>
-        <CircularProgress />
+      <div className="text-center">
+        <CircularProgress size="5rem" color="secondary" />
       </div>
     );
   }

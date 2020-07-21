@@ -41,9 +41,9 @@ const ResetPassword = ({
     initialValues: { password: "", confirm_password: "" },
     validationSchema: Yup.object({
       password: Yup.string()
-        .matches(lowercaseRegex, "one lowercase required!")
-        .matches(uppercaseRegex, "one uppercase required!")
-        .matches(numericRegex, "one number required!")
+        .matches(lowercaseRegex, "One lowercase required!")
+        .matches(uppercaseRegex, "One uppercase required!")
+        .matches(numericRegex, "One number required!")
         .min(8, "Minimum 8 characters")
         .required("Required!"),
       confirm_password: Yup.string()
@@ -63,8 +63,8 @@ const ResetPassword = ({
   //If Loading Show Spinner
   if (loading) {
     return (
-      <div className={classes.root}>
-        <CircularProgress />
+      <div className="text-center">
+        <CircularProgress size="5rem" color="secondary" />
       </div>
     );
   }

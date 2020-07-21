@@ -36,9 +36,9 @@ const ChangePassword = ({ changePassword, history }) => {
     validationSchema: Yup.object({
       current_password: Yup.string().required("Required!"),
       password: Yup.string()
-        .matches(lowercaseRegex, "one lowercase required!")
-        .matches(uppercaseRegex, "one uppercase required!")
-        .matches(numericRegex, "one number required!")
+        .matches(lowercaseRegex, "One lowercase required!")
+        .matches(uppercaseRegex, "One uppercase required!")
+        .matches(numericRegex, "One number required!")
         .min(8, "Minimum 8 characters")
         .required("Required!"),
       confirm_password: Yup.string()

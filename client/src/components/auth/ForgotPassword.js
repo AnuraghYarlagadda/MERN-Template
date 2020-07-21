@@ -52,8 +52,8 @@ const ForgotPassword = ({
   //If Loading Show Spinner
   if (loading) {
     return (
-      <div className={classes.root}>
-        <CircularProgress />
+      <div className="text-center">
+        <CircularProgress size="5rem" color="secondary" />
       </div>
     );
   }

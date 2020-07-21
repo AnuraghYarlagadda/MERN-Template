@@ -52,24 +52,21 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
         </NavLink>
       </NavItem>
       <UncontrolledDropdown nav inNavbar>
-        <DropdownToggle nav caret>
-          <RiAccountCircleLine size="1.3rem" /> {user ? `${user.name}` : ``}
+        <DropdownToggle nav caret style={{ color: "#fff" }}>
+          <RiAccountCircleLine size="1.3rem" color="#fff" />{" "}
+          {user ? `${user.name}` : ``}
         </DropdownToggle>
         <DropdownMenu right style={{ backgroundColor: "#f1f1f1" }}>
           <DropdownItem>
-            <li className="nav-item">
-              <Link className="nav-link" to="/editProfile">
-                <AiFillProfile size="1.2rem" /> <span>Edit Profile</span>
-              </Link>
-            </li>
+            <Link className="link" to="/editProfile">
+              <AiFillProfile size="1.3rem" /> <span>Edit Profile</span>
+            </Link>
           </DropdownItem>
           <DropdownItem>
-            <li className="nav-item">
-              <Link className="nav-link" to="/changePassword">
-                <BsFillShieldLockFill size="1.2rem" />{" "}
-                <span>Change Password</span>
-              </Link>
-            </li>
+            <Link className="link" to="/changePassword">
+              <BsFillShieldLockFill size="1.3rem" />{" "}
+              <span>Change Password</span>
+            </Link>
           </DropdownItem>
           <DropdownItem divider />
           <DropdownItem
@@ -106,12 +103,12 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   );
   const guestLinks = (
     <ul className="nav navbar-nav ml-auto">
-      <li className="nav-item">
+      <li className="nav-item active">
         <NavLink href="/register">
           <FaUserAlt size="1.2rem" /> Register
         </NavLink>
       </li>
-      <li>
+      <li className="nav-item active">
         <NavLink href="/login">
           <FaSignInAlt size="1.3rem" /> Login
         </NavLink>
@@ -186,7 +183,7 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           id="content"
           className={!loading ? (isAuthenticated ? "p-4 p-md-5" : "") : ""}
         >
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <nav className="navbar navbar-expand-lg navbar-dark bg-dark text-white">
             <div className="container-fluid">
               {!loading && (
                 <Fragment>

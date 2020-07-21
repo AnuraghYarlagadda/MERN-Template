@@ -19,7 +19,7 @@ const Alert = ({ alerts }) => {
     });
   }
   return (
-    <ToastContainer pauseOnFocusLoss={false} limit={2} transition={Bounce} />
+    <ToastContainer pauseOnFocusLoss={false} limit={1} transition={Bounce} />
   );
 };
 

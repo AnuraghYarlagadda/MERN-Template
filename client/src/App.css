@@ -10965,3 +10965,14 @@ a[data-toggle="collapse"] {
 .submenu:hover .list-unstyled {
   display: block;
 }
+
+.link {
+  color: #000;
+  display: block;
+  height: 100%;
+  min-width: 100%;
+}
+.link:hover {
+  color: #009688;
+  /* background: #1273de; */
+}
