@@ -10833,6 +10833,16 @@ h5,
 #sidebar.active .footer {
   display: none;
 }
+
+#sidebar.active .dropdown-toggle::after {
+  top: auto;
+  bottom: 10px;
+  right: 50%;
+  -webkit-transform: translateX(50%);
+  -ms-transform: translateX(50%);
+  transform: translateX(50%);
+}
+
 #sidebar .logo {
   display: block;
   color: #fff;
@@ -10950,4 +10960,8 @@ a[data-toggle="collapse"] {
 .btn.btn-primary:focus {
   background: #3e64ff !important;
   border-color: #3e64ff !important;
+}
+
+.submenu:hover .list-unstyled {
+  display: block;
 }
