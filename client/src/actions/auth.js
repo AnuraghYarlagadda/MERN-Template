@@ -136,7 +136,7 @@ export const changePassword = (
     const res = await api.put("/auth/changePassword", body);
     dispatch(setAlert(res.data.message, "dark"));
     dispatch(loadUser());
-    history.replace("/dashboard");
+    history.replace("/");
   } catch (err) {
     if (!err.response) return;
     const errors = err.response.data.errors;
@@ -156,7 +156,7 @@ export const editProfile = ({ password, name }, history) => async (
     const res = await api.put("/auth/editProfile", body);
     dispatch(setAlert(res.data.message, "dark"));
     dispatch(loadUser());
-    history.replace("/dashboard");
+    history.replace("/");
   } catch (err) {
     if (!err.response) return;
     const errors = err.response.data.errors;

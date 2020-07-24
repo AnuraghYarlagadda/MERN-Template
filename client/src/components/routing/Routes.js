@@ -17,12 +17,12 @@ const Routes = () => {
     <section className="container">
       <Alert />
       <Switch>
+        <PrivateRoute exact path="/" component={Dashboard} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/verify" component={VerifyOTP} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/forgotPassword" component={ForgotPassword} />
         <Route exact path="/resetPassword" component={ResetPassword} />
-        <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/changePassword" component={ChangePassword} />
         <PrivateRoute exact path="/editProfile" component={EditProfile} />
         <PrivateRoute exact path="/fileUpload" component={FileUpload} />

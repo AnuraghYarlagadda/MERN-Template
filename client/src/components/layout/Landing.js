@@ -1,8 +1,19 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
+
+import Login from "../auth/Login";
+import Register from "../auth/Register";
+import ForgotPassword from "../auth/ForgotPassword";
+import ResetPassword from "../auth/ResetPassword";
+import VerifyOTP from "../auth/VerifyOTP";
+import Alert from "./Alert";
+import NavBar from "./NavBar";
+import Home from "./Home";
+import PrivateRoute from "../routing/PrivateRoute";
+import NotFound from "./NotFound";
 
 const Landing = ({ isAuthenticated, loading }) => {
   //If Loading Show Spinner
@@ -13,15 +24,22 @@ const Landing = ({ isAuthenticated, loading }) => {
       </div>
     );
   } else if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    return <NavBar />;
   }
 
   return (
-    <div>
-      <div className="text-center">
-        <h1>Project Overview</h1>
-      </div>
-    </div>
+    <section>
+      <Alert />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/verify" component={VerifyOTP} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/forgotPassword" component={ForgotPassword} />
+        <Route exact path="/resetPassword" component={ResetPassword} />
+        <PrivateRoute component={NotFound} />
+      </Switch>
+    </section>
   );
 };
 

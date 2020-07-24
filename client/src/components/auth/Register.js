@@ -82,7 +82,7 @@ const Register = ({
 
   // Redirect if logged-in
   else if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/" />;
   }
 
   return (

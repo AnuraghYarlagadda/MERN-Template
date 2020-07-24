@@ -1,8 +1,11 @@
 import React, { Fragment, useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
+import Landing from "./components/layout/Landing";
+
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import NavBar from "./components/layout/NavBar";
+import "jquery/dist/jquery";
+import "jquery.easing/jquery.easing";
+import "bootstrap/dist/js/bootstrap";
 
 //Redux
 import { Provider } from "react-redux";
@@ -21,7 +24,7 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
-          <NavBar />
+          <Landing />
         </Fragment>
       </Router>
     </Provider>
