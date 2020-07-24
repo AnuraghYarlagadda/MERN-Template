@@ -70,7 +70,7 @@ const ResetPassword = ({
   }
   //Redirect if formData is empty
   else if (JSON.stringify(formData) === "{}") {
-    return <Redirect to="/login" />;
+    return <Redirect to="/" />;
   }
   // Redirect if logged-in
   else if (isAuthenticated) {
@@ -79,113 +79,125 @@ const ResetPassword = ({
 
   return (
     <Fragment>
-      <div className="row">
-        <div className="col-sm-3"></div>
-        <div className="col-sm-6 card jumbotron bg-light border-dark">
-          <h1>Reset Account Password</h1>
-          <hr />
-          <form onSubmit={formik.handleSubmit}>
-            <FormControl
-              className={classes.margin}
-              fullWidth
-              error={formik.errors.password && formik.touched.password}
-            >
-              <InputLabel htmlFor="password">New Password</InputLabel>
-              <Input
-                autoComplete="nope"
-                id="password"
-                name="password"
-                type={password ? "text" : "password"}
-                value={formik.values.password}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={() => togglePassword(!password)}
-                      onMouseDown={handleMouseDownPassword}
+      <section className="page-section-full bg-primary">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-8 text-center">
+              <h2 className="text-white mt-0">Reset Account Password</h2>
+              <hr className="divider light my-4" />
+              <div className="card shadow">
+                <div className="card-header py-3">
+                  <h6 className="m-0 font-weight-bold text-primary">
+                    Fill in the Details
+                  </h6>
+                </div>
+                <div className="card-body">
+                  <form onSubmit={formik.handleSubmit}>
+                    <FormControl
+                      className={classes.margin}
+                      fullWidth
+                      error={formik.errors.password && formik.touched.password}
                     >
-                      {!password ? (
-                        <MdVisibility
-                          size="1.5rem"
-                          style={{ color: "#40bf45" }}
-                        />
-                      ) : (
-                        <MdVisibilityOff
-                          size="1.5rem"
-                          style={{ color: "#de1212" }}
-                        />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-              <FormHelperText id="component-error-text">
-                {formik.errors.password &&
-                  formik.touched.password &&
-                  formik.errors.password}
-              </FormHelperText>
-            </FormControl>
+                      <InputLabel htmlFor="password">New Password</InputLabel>
+                      <Input
+                        autoComplete="nope"
+                        id="password"
+                        name="password"
+                        type={password ? "text" : "password"}
+                        value={formik.values.password}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={() => togglePassword(!password)}
+                              onMouseDown={handleMouseDownPassword}
+                            >
+                              {!password ? (
+                                <MdVisibility
+                                  size="1.5rem"
+                                  style={{ color: "#40bf45" }}
+                                />
+                              ) : (
+                                <MdVisibilityOff
+                                  size="1.5rem"
+                                  style={{ color: "#de1212" }}
+                                />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                      />
+                      <FormHelperText id="component-error-text">
+                        {formik.errors.password &&
+                          formik.touched.password &&
+                          formik.errors.password}
+                      </FormHelperText>
+                    </FormControl>
 
-            <FormControl
-              className={classes.margin}
-              fullWidth
-              error={
-                formik.errors.confirm_password &&
-                formik.touched.confirm_password
-              }
-            >
-              <InputLabel htmlFor="confirm_password">
-                Confirm Password
-              </InputLabel>
-              <Input
-                autoComplete="nope"
-                id="confirm_password"
-                name="confirm_password"
-                type={confirm_password ? "text" : "password"}
-                value={formik.values.confirm_password}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={() => toggleConfirmPassword(!confirm_password)}
-                      onMouseDown={handleMouseDownPassword}
+                    <FormControl
+                      className={classes.margin}
+                      fullWidth
+                      error={
+                        formik.errors.confirm_password &&
+                        formik.touched.confirm_password
+                      }
                     >
-                      {!confirm_password ? (
-                        <MdVisibility
-                          size="1.5rem"
-                          style={{ color: "#40bf45" }}
-                        />
-                      ) : (
-                        <MdVisibilityOff
-                          size="1.5rem"
-                          style={{ color: "#de1212" }}
-                        />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-              <FormHelperText id="component-error-text">
-                {formik.errors.confirm_password &&
-                  formik.touched.confirm_password &&
-                  formik.errors.confirm_password}
-              </FormHelperText>
-            </FormControl>
+                      <InputLabel htmlFor="confirm_password">
+                        Confirm Password
+                      </InputLabel>
+                      <Input
+                        autoComplete="nope"
+                        id="confirm_password"
+                        name="confirm_password"
+                        type={confirm_password ? "text" : "password"}
+                        value={formik.values.confirm_password}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={() =>
+                                toggleConfirmPassword(!confirm_password)
+                              }
+                              onMouseDown={handleMouseDownPassword}
+                            >
+                              {!confirm_password ? (
+                                <MdVisibility
+                                  size="1.5rem"
+                                  style={{ color: "#40bf45" }}
+                                />
+                              ) : (
+                                <MdVisibilityOff
+                                  size="1.5rem"
+                                  style={{ color: "#de1212" }}
+                                />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                      />
+                      <FormHelperText id="component-error-text">
+                        {formik.errors.confirm_password &&
+                          formik.touched.confirm_password &&
+                          formik.errors.confirm_password}
+                      </FormHelperText>
+                    </FormControl>
 
-            <div className="text-center">
-              <button type="submit" className="btn btn-danger">
-                Reset
-              </button>
+                    <div className="text-center">
+                      <button type="submit" className="btn btn-danger">
+                        Reset
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
-          </form>
-          <hr />
+          </div>
         </div>
-        <div className="col-sm-3"></div>
-      </div>
+      </section>
     </Fragment>
   );
 };

@@ -58,21 +58,16 @@ const FileUpload = () => {
   };
 
   return (
-    <div>
-      <div className="row m-5">
-        <div className="col-sm-8">
-          <form onSubmit={(e) => handleFileUpload(e)}>
-            <input type="file" onChange={onFileSelected} />
-            <input type="submit" className="btn btn-primary"></input>
-          </form>
-        </div>
-        <div className="col-sm-4">
-          <Fragment>
-            {loading && <CircularProgressWithLabel value={progress} />}
-          </Fragment>
-        </div>
-      </div>
-      <div className="row m-5">
+    <div className="row">
+      <div className="col-lg-6 text-center mt-3">
+        <form onSubmit={(e) => handleFileUpload(e)}>
+          <input type="file" onChange={onFileSelected} />
+          <input type="submit" className="btn btn-primary"></input>
+        </form>
+        <hr className="bg-dark" />
+        <Fragment>
+          {loading && <CircularProgressWithLabel value={progress} />}
+        </Fragment>
         <Fragment>
           {downloadUrl && (
             <a
@@ -89,19 +84,16 @@ const FileUpload = () => {
           )}
         </Fragment>
       </div>
-      <div className="row m-5">
-        <div className="col-sm-3">
-          <img
-            src={
-              downloadUrl ||
-              "https://advance.einstein.edu/wp-content/uploads/cropped-placeholder.jpg"
-            }
-            width="50"
-            height="50"
-            alt="anu"
-          />
-        </div>
-        <div className="col-sm-9"></div>
+      <div className="col-lg-6 text-center p-2">
+        <img
+          src={
+            downloadUrl ||
+            "https://advance.einstein.edu/wp-content/uploads/cropped-placeholder.jpg"
+          }
+          width="250"
+          height="250"
+          alt="anu"
+        />
       </div>
     </div>
   );

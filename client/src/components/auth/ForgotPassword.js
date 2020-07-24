@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Link, Redirect, withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { verifyEmail } from "../../actions/auth";
@@ -65,55 +65,67 @@ const ForgotPassword = ({
 
   return (
     <Fragment>
-      <div className="row">
-        <div className="col-sm-3"></div>
-        <div className="col-sm-6 card jumbotron bg-light border-dark">
-          <h1>Forgot Password</h1>
-          <p>
-            <BsFillShieldLockFill size="1.5rem" /> Verify your Email to reset
-            the Password!
-          </p>
-          <hr />
-          <form onSubmit={formik.handleSubmit}>
-            <FormControl
-              className={classes.margin}
-              fullWidth
-              error={formik.errors.email && formik.touched.email}
-            >
-              <InputLabel htmlFor="email">Email</InputLabel>
-              <Input
-                id="email"
-                name="email"
-                label="email"
-                type="email"
-                value={formik.values.email}
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                endAdornment={
-                  <InputAdornment position="start">
-                    <AiOutlineMail size="1.5rem" style={{ color: "#d00205" }} />
-                  </InputAdornment>
-                }
-              />
-              <FormHelperText id="component-error-text">
-                {formik.errors.email &&
-                  formik.touched.email &&
-                  formik.errors.email}
-              </FormHelperText>
-            </FormControl>
-            <div className="text-center">
-              <button type="submit" className="btn btn-primary">
-                Verify Email
-              </button>
+      <section className="page-section-full bg-primary">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-8 text-center">
+              <h2 className="text-white mt-0">Forgot Password</h2>
+              <hr className="divider light my-4" />
+              <div className="card shadow">
+                <div className="card-header py-3">
+                  <h6 className="m-0 font-weight-bold text-primary">
+                    <BsFillShieldLockFill size="1.5rem" /> Verify your Email to
+                    reset the Password!
+                  </h6>
+                </div>
+                <div className="card-body">
+                  <form onSubmit={formik.handleSubmit}>
+                    <FormControl
+                      className={classes.margin}
+                      fullWidth
+                      error={formik.errors.email && formik.touched.email}
+                    >
+                      <InputLabel htmlFor="email">Email</InputLabel>
+                      <Input
+                        id="email"
+                        name="email"
+                        label="email"
+                        type="email"
+                        value={formik.values.email}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        endAdornment={
+                          <InputAdornment position="start">
+                            <AiOutlineMail
+                              size="1.5rem"
+                              style={{ color: "#d00205" }}
+                            />
+                          </InputAdornment>
+                        }
+                      />
+                      <FormHelperText id="component-error-text">
+                        {formik.errors.email &&
+                          formik.touched.email &&
+                          formik.errors.email}
+                      </FormHelperText>
+                    </FormControl>
+                    <div className="text-center">
+                      <button type="submit" className="btn btn-primary">
+                        Verify Email
+                      </button>
+                    </div>
+                  </form>
+                  <hr />
+                  <h6>
+                    After Successfull verfication you'll be able to reset your
+                    Account Password
+                  </h6>
+                </div>
+              </div>
             </div>
-          </form>
-          <hr />
-          <h6>
-            Already have an account? <Link to="/login">Sign In</Link>
-          </h6>
+          </div>
         </div>
-        <div className="col-sm-3"></div>
-      </div>
+      </section>
     </Fragment>
   );
 };

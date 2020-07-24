@@ -190,7 +190,7 @@ export const resetPassword = ({ email }, { password }, history) => async (
     const res = await api.put("/auth/resetPassword", body);
     dispatch(setAlert(res.data.message, "info"));
     dispatch(clearFormData());
-    history.replace("/login");
+    history.replace("/");
   } catch (err) {
     if (!err.response) return;
     const errors = err.response.data.errors;

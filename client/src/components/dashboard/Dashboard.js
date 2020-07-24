@@ -2,7 +2,7 @@ import React from "react";
 
 const Dashboard = () => {
   return (
-    <div>
+    <h6 className="justify-content-center">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Nec ullamcorper sit
       amet risus nullam eget felis eget. Proin nibh nisl condimentum id
@@ -104,7 +104,7 @@ const Dashboard = () => {
       semper eget. Viverra adipiscing at in tellus integer feugiat scelerisque
       varius morbi. Massa ultricies mi quis hendrerit. Enim nulla aliquet
       porttitor lacus luctus accumsan tortor posuere ac.
-    </div>
+    </h6>
   );
 };
 

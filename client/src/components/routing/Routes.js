@@ -19,8 +19,8 @@ const Routes = () => {
       <Switch>
         <PrivateRoute exact path="/" component={Dashboard} />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/verify" component={VerifyOTP} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/verify" component={VerifyOTP} />
         <Route exact path="/forgotPassword" component={ForgotPassword} />
         <Route exact path="/resetPassword" component={ResetPassword} />
         <PrivateRoute exact path="/changePassword" component={ChangePassword} />

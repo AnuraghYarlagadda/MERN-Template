@@ -62,14 +62,12 @@ const Login = ({ login, isAuthenticated, loading }) => {
 
   return (
     <Fragment>
-      <div className="row">
-        <div className="col-sm-3"></div>
-        <div className="col-sm-6 card jumbotron bg-light border-dark">
-          <h1>Sign In</h1>
-          <p>
-            <i className="fas fa-user"></i> Sign Into Your Account
-          </p>
-          <hr />
+      <div className="card shadow">
+        <div className="card-header py-3">
+          <h6 className="m-0 font-weight-bold text-primary">Sign In</h6>
+        </div>
+        <div className="card-body">
+          <i className="fas fa-user"></i> Sign Into Your Account
           <form onSubmit={formik.handleSubmit}>
             <FormControl
               className={classes.margin}
@@ -152,10 +150,12 @@ const Login = ({ login, isAuthenticated, loading }) => {
           </h6>
           <hr />
           <h6>
-            Don't have an account? <Link to="/register">Sign Up</Link>
+            Don't have an account?{" "}
+            <a href="#register" className="js-scroll-trigger">
+              Sign Up
+            </a>
           </h6>
         </div>
-        <div className="col-sm-3"></div>
       </div>
     </Fragment>
   );

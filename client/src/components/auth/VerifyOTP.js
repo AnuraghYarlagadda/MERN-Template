@@ -55,7 +55,7 @@ const VerifyOTP = ({
   }
   //Redirect if formData is empty
   else if (JSON.stringify(formData) === "{}") {
-    return <Redirect to="/login" />;
+    return <Redirect to="/" />;
   }
   // Redirect if logged-in
   else if (isAuthenticated) {
@@ -64,66 +64,88 @@ const VerifyOTP = ({
 
   return (
     <Fragment>
-      <div className="row">
-        <div className="col-sm-3"></div>
-        <div className="col-sm-6 card jumbotron bg-light border-dark">
-          <h1 className="my-3">Verify OTP</h1>
-          <div className="row">
-            <div className="col-sm-9 mt-2">
-              {" "}
-              <OTPInput
-                value={OTP}
-                onChange={setOTP}
-                autoFocus
-                OTPLength={6}
-                otpType="number"
-                disabled={false}
-                secure
-              />
-            </div>
-            <div className="col-sm-3 mt-2 text-center">
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  if (OTP.length < 6) {
-                    setMessage("Invalid OTP");
-                  } else {
-                    setMessage("");
-                    if (formData.forgot) {
-                      validateOTPAndResetPassword(OTP, formData, otps, history);
-                    } else {
-                      validateOTPAndRegister(OTP, formData, otps);
-                    }
-                  }
-                }}
-              >
-                Submit
-              </Button>
+      <section className="page-section-full bg-primary">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-8 text-center">
+              <h2 className="text-white mt-0">Verify OTP</h2>
+              <hr className="divider light my-4" />
+              <div className="card shadow">
+                <div className="card-header py-3">
+                  <h6 className="m-0 font-weight-bold text-primary">
+                    Enter OTP
+                  </h6>
+                </div>
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-sm-9 mt-2">
+                      {" "}
+                      <OTPInput
+                        value={OTP}
+                        onChange={setOTP}
+                        autoFocus
+                        OTPLength={6}
+                        otpType="number"
+                        disabled={false}
+                        secure
+                      />
+                    </div>
+                    <div className="col-sm-3 mt-2 text-center">
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                          if (OTP.length < 6) {
+                            setMessage("Invalid OTP");
+                          } else {
+                            setMessage("");
+                            if (formData.forgot) {
+                              validateOTPAndResetPassword(
+                                OTP,
+                                formData,
+                                otps,
+                                history
+                              );
+                            } else {
+                              validateOTPAndRegister(OTP, formData, otps);
+                            }
+                          }
+                        }}
+                      >
+                        Submit
+                      </Button>
+                    </div>
+                  </div>
+                  <Grid
+                    container
+                    alignItems="center"
+                    justify="center"
+                    direction="row"
+                  >
+                    <FormControl error={OTP.length < 6}>
+                      <FormHelperText
+                        style={{ fontSize: "1.5rem", justifyContent: "center" }}
+                      >
+                        {OTP.length < 6 && errorMessage}
+                      </FormHelperText>
+                    </FormControl>
+                  </Grid>
+                  <hr />
+                  <div className="text-center">
+                    <ResendOTP
+                      maxTime={180}
+                      renderButton={renderButton}
+                      renderTime={renderTime}
+                      onResendClick={() => verifyEmail(formData, history)}
+                    />
+                  </div>
+                  <hr />
+                </div>
+              </div>
             </div>
           </div>
-          <Grid container alignItems="center" justify="center" direction="row">
-            <FormControl error={OTP.length < 6}>
-              <FormHelperText
-                style={{ fontSize: "1.5rem", justifyContent: "center" }}
-              >
-                {OTP.length < 6 && errorMessage}
-              </FormHelperText>
-            </FormControl>
-          </Grid>
-          <hr />
-          <div className="text-center">
-            <ResendOTP
-              maxTime={180}
-              renderButton={renderButton}
-              renderTime={renderTime}
-              onResendClick={() => verifyEmail(formData, history)}
-            />
-          </div>
-          <hr />
         </div>
-        <div className="col-sm-3"></div>
-      </div>
+      </section>
     </Fragment>
   );
 };

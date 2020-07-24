@@ -3,9 +3,6 @@ import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
-import Login from "../auth/Login";
-import Register from "../auth/Register";
 import ForgotPassword from "../auth/ForgotPassword";
 import ResetPassword from "../auth/ResetPassword";
 import VerifyOTP from "../auth/VerifyOTP";
@@ -32,9 +29,7 @@ const Landing = ({ isAuthenticated, loading }) => {
       <Alert />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/register" component={Register} />
         <Route exact path="/verify" component={VerifyOTP} />
-        <Route exact path="/login" component={Login} />
         <Route exact path="/forgotPassword" component={ForgotPassword} />
         <Route exact path="/resetPassword" component={ResetPassword} />
         <PrivateRoute component={NotFound} />

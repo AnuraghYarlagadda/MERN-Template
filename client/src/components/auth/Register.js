@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Link, Redirect, withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { verifyEmail } from "../../actions/auth";
@@ -87,15 +87,13 @@ const Register = ({
 
   return (
     <Fragment>
-      <div className="row">
-        <div className="col-sm-3"></div>
-        <div className="col-sm-6 card jumbotron bg-light border-dark">
-          <h1>Sign Up</h1>
-          <p>
-            <i className="fas fa-user"></i> Please fill in this form to create
-            an account!
-          </p>
-          <hr />
+      <div className="card shadow">
+        <div className="card-header py-3">
+          <h6 className="m-0 font-weight-bold text-primary">Sign Up</h6>
+        </div>
+        <div className="card-body">
+          <i className="fas fa-user"></i> Please fill in this form to create an
+          account!
           <form onSubmit={formik.handleSubmit}>
             <FormControl
               className={classes.margin}
@@ -252,10 +250,12 @@ const Register = ({
           </form>
           <hr />
           <h6>
-            Already have an account? <Link to="/login">Sign In</Link>
+            Already have an account?{" "}
+            <a href="#login" className="js-scroll-trigger">
+              Sign In
+            </a>
           </h6>
         </div>
-        <div className="col-sm-3"></div>
       </div>
     </Fragment>
   );

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-// import PropTypes from "prop-types";
 import $ from "jquery";
+import Register from "../auth/Register";
+import Login from "../auth/Login";
 
 const Home = ({ location }) => {
   useEffect(() => {
@@ -10,7 +11,6 @@ const Home = ({ location }) => {
         location.pathname.replace(/^\//, "") ===
         this.pathname.replace(/^\//, "")
       ) {
-        console.log("IN");
         var target = $(this.hash);
         target = target.length
           ? target
@@ -64,7 +64,7 @@ const Home = ({ location }) => {
       >
         <div className="container">
           <a className="navbar-brand js-scroll-trigger" href="#page-top">
-            Start Bootstrap
+            Project
           </a>
           <button
             className="navbar-toggler navbar-toggler-right"
@@ -82,6 +82,16 @@ const Home = ({ location }) => {
               <li className="nav-item">
                 <a className="nav-link js-scroll-trigger" href="#about">
                   About
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link js-scroll-trigger" href="#register">
+                  Register
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link js-scroll-trigger" href="#login">
+                  Login
                 </a>
               </li>
               <li className="nav-item">
@@ -109,7 +119,7 @@ const Home = ({ location }) => {
               <hr className="divider my-4" />
             </div>
             <div className="col-lg-8 align-self-baseline">
-              <p className="text-white-75 font-weight-light mb-5">
+              <p className="text-white-50 font-weight-light mb-5">
                 Start Bootstrap can help you build better websites using the
                 Bootstrap framework! Just download a theme and start
                 customizing, no strings attached!
@@ -124,6 +134,7 @@ const Home = ({ location }) => {
           </div>
         </div>
       </header>
+
       {/* <!-- About--> */}
       <section className="page-section bg-primary" id="about">
         <div className="container">
@@ -138,7 +149,7 @@ const Home = ({ location }) => {
               </p>
               <a
                 className="btn btn-light btn-xl js-scroll-trigger"
-                href="#services"
+                href="#register"
               >
                 Get Started!
               </a>
@@ -146,6 +157,33 @@ const Home = ({ location }) => {
           </div>
         </div>
       </section>
+
+      {/* <!-- Register--> */}
+      <section className="page-section-custom bg-primary" id="register">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-8 text-center">
+              <h2 className="text-white mt-0">Sign Up!</h2>
+              <hr className="divider light my-4" />
+              <Register />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* <!-- Login--> */}
+      <section className="page-section-custom bg-primary" id="login">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-8 text-center">
+              <h2 className="text-white mt-0">Login!</h2>
+              <hr className="divider light my-4" />
+              <Login />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* <!-- Services--> */}
       <section className="page-section" id="services">
         <div className="container">
@@ -231,7 +269,5 @@ const Home = ({ location }) => {
     </div>
   );
 };
-
-Home.propTypes = {};
 
 export default Home;

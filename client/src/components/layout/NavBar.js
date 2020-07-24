@@ -116,15 +116,15 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           </Link>
 
           {/* <!-- Divider --> */}
-          <hr className="sidebar-divider my-0" />
+          {/* <hr className="sidebar-divider my-0" /> */}
 
-          {/* <!-- Nav Item - Dashboard --> */}
-          <li className="nav-item active">
+          {/* <!-- Nav Item - Dashboard -->
+          <li className="nav-item">
             <CustomLink className="nav-link" to="/" tag="a">
               <i className="fas fa-fw fa-tachometer-alt"></i>
               <span>Dashboard</span>
             </CustomLink>
-          </li>
+          </li>*/}
 
           {/* <!-- Divider --> */}
           <hr className="sidebar-divider" />
